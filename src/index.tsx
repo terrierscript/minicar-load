@@ -1,63 +1,38 @@
-import { Frame, Stack } from "framer"
-import { motion } from "framer-motion"
-
 import React from "react"
 import { render } from "react-dom"
-import { ThemeProvider, CSSReset } from "@chakra-ui/core"
+import { ThemeProvider, CSSReset, Box, Stack } from "@chakra-ui/core"
+import Anime from "react-anime"
 
-import { useSpring, animated } from "react-spring"
-
-// function Spring() {
-//   const props = useSpring({
-//     to: { color: "red" },
-//     // from: { scale: 1 }
-//     delay: 100,
-//   })
-//   console.log(props)
-//   return <animated.div style={props}>I will fade in</animated.div>
-// }
-const Example = ({ startX }) => {
-  return (
-    <motion.div
-      style={{
-        width: "100%",
-        background: "white",
-        height: "30px",
-        x: startX,
-        border: "black 1px solid",
-      }}
-      animate={{
-        x: `calc(150vw + ${startX})`,
-      }}
-      transition={{
-        duration: 2,
-        ease: "linear",
-        loop: Infinity,
-      }}
-    />
-  )
-}
 const App = () => {
   return (
     <ThemeProvider>
       <CSSReset />
-      {/* <Spring /> */}
-      <Frame width="100vw" height="100vh">
-        <Stack
-          direction="horizontal"
-          gap={1000}
-          width={"500vw"}
-          height={"50vh"}
-          // distribution="space-evenly"
-        >
-          <Example startX={"-0vw"} />
-          <Example startX={"-25vw"} />
-          <Example startX={"-50vw"} />
-          <Example startX={"-75vw"} />
-          <Example startX={"-100vw"} />
+      <Box bg="gray.700" width="100vw" height="100vh">
+        <Stack>
+          <Anime
+            translateX={["-30vw", "200vw"]}
+            // opacity={[1, 0.5]}
+            // delay={1000}
+            easing="linear"
+            duration={800}
+            loop={Infinity}
+          >
+            <Box mt="80" bg="tomato" width="30vw" height="20vh"></Box>
+          </Anime>
         </Stack>
-      </Frame>
-      {/* <Example /> */}
+        <Stack>
+          <Anime
+            translateX={["-50vw", "100vw"]}
+            // opacity={[1, 0.5]}
+            // delay={1000}
+            easing="linear"
+            duration={1000}
+            loop={Infinity}
+          >
+            <Box mt="80" bg="white" width="50vw" height="8vh"></Box>
+          </Anime>
+        </Stack>
+      </Box>
     </ThemeProvider>
   )
 }
